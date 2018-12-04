@@ -1,4 +1,4 @@
-#Define number of nurons in each network
+#Define number of nurons in each layer
 
 nodesHiddenidden = 12
 nodesOutput =4
