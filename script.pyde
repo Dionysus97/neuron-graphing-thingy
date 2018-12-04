@@ -1,44 +1,58 @@
-nodesH = 12
-nodesE =4
-nodesI = 5
-sizey = 600
-sizex = 1200
-CS = min([((((sizey-(sizey/10))/nodesH)/10)*9), ((((sizey-(sizey/10))/nodesI)/10)*9),((((sizey-(sizey/10))/nodesE)/10)*9)])
-crep = (sizex- CS) / 2
+#Define number of nurons in each network
 
-Hinc = ((sizey - (sizey / 10)) / nodesH)
-Iinc = ((sizey - (sizey / 10)) / nodesI)
-Einc = ((sizey - (sizey / 10)) / nodesE)
+nodesHiddenidden = 12
+nodesOutput =4
+nodesInput = 5
+sizeY = 600
+sizeX = 1200
+
+
+#sets up sizing and incraments
+
+Osize = min([((((sizeY-(sizeY/10))/nodesHiddenidden)/10)*9), ((((sizeY-(sizeY/10))/nodesInput)/10)*9),((((sizeY-(sizeY/10))/nodesOutput)/10)*9)])
+xIincrament = (sizeX- Osize) / 2
+
+hiddenIincrament = ((sizeY - (sizeY / 10)) / nodesHiddenidden)
+inputIincrament = ((sizeY - (sizeY / 10)) / nodesInput)
+outputIincrament = ((sizeY - (sizeY / 10)) / nodesOutput)
+
+
 
 def setup():
-    size(sizex,sizey)
+    size(sizeX,sizeY)
     noLoop()
     
 def draw():
-    sC = CS/2
+    xPlace = Osize/2
     ellipseMode(CENTER)
     background(255)
-    Hi = Hinc/2
-    Ii = Iinc /2
-    for x in range(nodesI):    
-        ellipse(sC,(Ii),CS,CS)
+    hiddenIincramentHold = hiddenIincrament/2
+    inputIincramentHold = inputIincrament /2
+    
+    
+    for x in range(nodesInput):    
+        ellipse(xPlace,(inputIincramentHold),Osize,Osize)
 
-        Hi = Hinc/2
-        for xx in range(nodesH):
-            line(sC + (CS/2),(Ii), (sC +crep) - (CS/2),Hi)
-            Hi = Hi + Hinc
-        Ii= Ii + Iinc
-    sC = sC + crep
-    Hi = Hinc/2
-    for x in range(nodesH):
-        ellipse(sC,Hi,CS,CS)
-        eI = Einc /2 
-        for xx in range(nodesE):
-            line(sC + (CS/2),(Hi), (sC +crep) - (CS/2),eI)
-            eI = eI + Einc
-        Hi = Hi + Hinc
-    sC = sC + crep
-    eI = Einc /2 
-    for x in range(nodesE):
-        ellipse(sC,(eI),CS,CS)
-        eI = eI + Einc
+        hiddenIincramentHold = hiddenIincrament/2
+        for xx in range(nodesHiddenidden):
+            line(xPlace + (Osize/2),(inputIincramentHold), (xPlace +xIincrament) - (Osize/2),hiddenIincramentHold)
+            hiddenIincramentHold = hiddenIincramentHold + hiddenIincrament
+        inputIincramentHold= inputIincramentHold + inputIincrament
+        
+    xPlace = xPlace + xIincrament
+    hiddenIincramentHold = hiddenIincrament/2
+    
+    for x in range(nodesHiddenidden):
+        ellipse(xPlace,hiddenIincramentHold,Osize,Osize)
+        Hold = outputIincrament /2 
+        for xx in range(nodesOutput):
+            line(xPlace + (Osize/2),(hiddenIincramentHold), (xPlace +xIincrament) - (Osize/2),Hold)
+            Hold = Hold + outputIincrament
+        hiddenIincramentHold = hiddenIincramentHold + hiddenIincrament
+        
+    xPlace = xPlace + xIincrament
+    Hold = outputIincrament /2 
+    
+    for x in range(nodesOutput):
+        ellipse(xPlace,(Hold),Osize,Osize)
+        Hold = Hold + outputIincrament
